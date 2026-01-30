@@ -3,106 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App - GitHub Pages</title>
+    <title>Quiz App Pro</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .quiz-container { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
-        .header { display: flex; justify-content: space-between; color: #666; font-size: 0.9rem; margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
-        h2 { font-size: 1.2rem; color: #333; margin-top: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .quiz-container { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); width: 90%; max-width: 600px; }
+        .header { display: flex; justify-content: space-between; color: #555; font-weight: bold; margin-bottom: 1.5rem; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        h2 { font-size: 1.25rem; line-height: 1.5; white-space: pre-line; color: #1a1a1b; }
         .options-container { margin: 1.5rem 0; }
-        .option { display: block; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 8px; cursor: pointer; transition: background 0.2s; }
-        .option:hover { background: #f0f7ff; }
-        .option input { margin-right: 10px; }
-        .controls { display: flex; gap: 10px; }
-        button { flex: 1; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: opacity 0.2s; }
-        .btn-reveal { background: #6c757d; color: white; }
+        .option { display: block; padding: 12px; border: 2px solid #eee; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { border-color: #007bff; background: #f8fbff; }
+        .option input { margin-right: 12px; transform: scale(1.2); }
+        .controls { display: flex; gap: 10px; margin-top: 20px; }
+        button { flex: 1; padding: 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; }
+        .btn-reveal { background: #e4e6eb; color: #4b4b4b; }
         .btn-next { background: #007bff; color: white; }
-        .btn-reveal:disabled { opacity: 0.5; cursor: not-allowed; }
-        .correct-answer { margin-top: 15px; padding: 10px; background: #d4edda; color: #155724; border-radius: 6px; display: none; font-weight: bold; }
-        .hidden { display: none; }
+        .btn-next:hover { background: #0056b3; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; font-weight: bold; border-left: 5px solid; }
+        .feedback.show { display: block; background: #e7f3ff; color: #0056b3; border-color: #007bff; }
+        .results-screen { text-align: center; }
+        .score { font-size: 3rem; color: #007bff; margin: 20px 0; }
     </style>
 </head>
 <body>
 
 <div class="quiz-container" id="quiz">
     <div class="header">
-        <span id="counter">Question 0/0</span>
+        <span id="counter">Loading counter...</span>
+        <span id="score-live">Correct: 0</span>
     </div>
-    <div id="question-content">
-        <h2 id="question-text">Loading...</h2>
+    
+    <div id="game-area">
+        <h2 id="question-text">Loading question...</h2>
         <div id="options" class="options-container"></div>
-        <div id="feedback" class="correct-answer"></div>
+        <div id="feedback-area" class="feedback"></div>
+        
+        <div class="controls">
+            <button id="reveal-btn" class="btn-reveal" onclick="revealResponse()">Answer</button>
+            <button id="next-btn" class="btn-next" onclick="processAndNext()">Next</button>
+        </div>
     </div>
-    <div class="controls">
-        <button id="reveal-btn" class="btn-reveal" onclick="revealResponse()">Answer</button>
-        <button id="next-btn" class="btn-next" onclick="nextQuestion()">Next</button>
+
+    <div id="results-area" class="results-screen" style="display: none;">
+        <h2>You rocked it!</h2>
+        <div class="score" id="final-score">0 / 0</div>
+        <p id="final-msg"></p>
+        <button class="btn-next" onclick="location.reload()">Restart</button>
     </div>
 </div>
 
 <script>
-    let allQuestions = [];
+    let questions = [];
     let currentIndex = 0;
+    let correctCount = 0;
 
-    async function loadQuestions() {
+    async function initQuiz() {
         try {
-            const response = await fetch('questions.json');
-            const data = await response.json();
-            allQuestions = data.sort(() => Math.random() - 0.5);
+            const resp = await fetch('questions.json');
+            const data = await resp.json();
+            questions = data.sort(() => Math.random() - 0.5);
             renderQuestion();
-        } catch (error) {
-            document.getElementById('question-text').innerText = "Error JSON file could not be loaded";
-            console.error(error);
+        } catch (e) {
+            document.getElementById('question-text').innerText = "Error questions file could not be loaded";
         }
     }
 
     function renderQuestion() {
-        if (currentIndex >= allQuestions.length) {
-            showFinished();
+        if (currentIndex >= questions.length) {
+            showResults();
             return;
         }
 
-        const q = allQuestions[currentIndex];
-        document.getElementById('counter').innerText = `Question ${currentIndex + 1}/${allQuestions.length}`;
+        const q = questions[currentIndex];
+        document.getElementById('counter').innerText = `Question ${currentIndex + 1} de ${questions.length}`;
         document.getElementById('question-text').innerText = q.question;
-        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('feedback-area').classList.remove('show');
         
-        const optionsDiv = document.getElementById('options');
-        optionsDiv.innerHTML = '';
+        const container = document.getElementById('options');
+        container.innerHTML = '';
 
-        q.options.forEach((opt, index) => {
+        q.options.forEach(opt => {
             const label = document.createElement('label');
             label.className = 'option';
-            const input = document.createElement('input');
-            input.type = (q.type === 'checkbox') ? 'checkbox' : 'radio';
-            input.name = 'quiz-option';
-            input.value = opt;
+            const letter = opt.split('.')[0].trim(); 
             
-            label.appendChild(input);
-            label.appendChild(document.createTextNode(opt));
-            optionsDiv.appendChild(label);
+            label.innerHTML = `
+                <input type="${q.type === 'checkbox' ? 'checkbox' : 'radio'}" 
+                       name="answer" 
+                       value="${letter}">
+                ${opt}
+            `;
+            container.appendChild(label);
         });
     }
 
     function revealResponse() {
-        const q = allQuestions[currentIndex];
-        const feedback = document.getElementById('feedback');
-        feedback.innerText = `Correct Answer: ${q.response}`;
-        feedback.style.display = 'block';
+        const q = questions[currentIndex];
+        const fb = document.getElementById('feedback-area');
+        fb.innerText = `Correct answer: ${q.response}`;
+        fb.classList.add('show');
     }
 
-    function nextQuestion() {
+    function processAndNext() {
+        const q = questions[currentIndex];
+        const selected = Array.from(document.querySelectorAll('input[name="answer"]:checked'))
+                              .map(el => el.value)
+                              .sort(); // Ordenar para comparar con "A, B"
+        
+        // Limpiar la respuesta del JSON (quitar espacios y separar por comas)
+        const correctLetters = q.response.split(',').map(s => s.trim()).sort();
+        
+        // Comparar si las selecciones coinciden exactamente con la respuesta
+        const isCorrect = JSON.stringify(selected) === JSON.stringify(correctLetters);
+        
+        if (isCorrect) {
+            correctCount++;
+            document.getElementById('score-live').innerText = `Correct responses: ${correctCount}`;
+        }
+
         currentIndex++;
         renderQuestion();
     }
 
-    function showFinished() {
-        document.getElementById('question-content').innerHTML = "<h2>You rocked it!</h2>";
-        document.getElementById('reveal-btn').classList.add('hidden');
-        document.getElementById('next-btn').innerText = "Restart";
-        document.getElementById('next-btn').onclick = () => location.reload();
+    function showResults() {
+        document.getElementById('game-area').style.display = 'none';
+        document.getElementById('results-area').style.display = 'block';
+        document.getElementById('final-score').innerText = `${correctCount} / ${questions.length}`;
+        
+        const percent = (correctCount / questions.length) * 100;
+        document.getElementById('final-msg').innerText = percent >= 70 ? "You rocked it!" : "Keep studing";
     }
 
-    loadQuestions();
+    initQuiz();
 </script>
 
 </body>
