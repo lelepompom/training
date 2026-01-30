@@ -45,5 +45,262 @@
             "E. Replace the platform's relational database systems with a NoSQL database"
         ],
         "response": "A,D"
+    },
+    {
+        "question": "To reduce costs, the Director of Engineering has required all developers to move their development infrastructure resources from on-premises virtual machines (VMs) to Google Cloud Platform. These resources go through multiple start/stop events during the day and require state to persist. You have been asked to design the process of running a development environment in Google Cloud while providing cost visibility to the finance department. Which two steps should you take? (Choose two.)",
+        "type": "checkbox",
+        "options": [
+            "A. Use the - -no-auto-delete flag on all persistent disks and stop the VM",
+            "B. Use the - -auto-delete flag on all persistent disks and terminate the VM",
+            "C. Apply VM CPU utilization label and include it in the BigQuery billing export",
+            "D. Use Google BigQuery billing export and labels to associate cost to groups",
+            "E. Store all state into local SSD, snapshot the persistent disks, and terminate the VM",
+            "F. Store all state in Google Cloud Storage, snapshot the persistent disks, and terminate the VM"
+        ],
+        "response": "A, D"
+    },
+    {
+        "question": "Your company wants to track whether someone is present in a meeting room reserved for a scheduled meeting. There are 1000 meeting rooms across 5 offices on 3 continents. Each room is equipped with a motion sensor that reports its status every second. The data from the motion detector includes only a sensor ID and several different discrete items of information. Analysts will use this data, together with information about account owners and office locations. Which database type should you use?",
+        "type": "radio",
+        "options": [
+            "A. Flat file",
+            "B. NoSQL",
+            "C. Relational",
+            "D. Blobstore"
+        ],
+        "response": "B"
+    },
+    {
+        "question": "You set up an autoscaling instance group to serve web traffic for an upcoming launch. After configuring the instance group as a backend service to an HTTP(S) load balancer, you notice that virtual machine (VM) instances are being terminated and re-launched every minute. The instances do not have a public IP address. You have verified the appropriate web response is coming from each instance using the curl command. You want to ensure the backend is configured correctly. What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Ensure that a firewall rules exists to allow source traffic on HTTP/HTTPS to reach the load balancer.",
+            "B. Assign a public IP to each instance and configure a firewall rule to allow the load balancer to reach the instance public IP.",
+            "C. Ensure that a firewall rule exists to allow load balancer health checks to reach the instances in the instance group.",
+            "D. Create a tag on each instance with the name of the load balancer. Configure a firewall rule with the name of the load balancer as the source and the instance tag as the destination."
+        ],
+        "response": "C"
+    },
+    {
+        "question": "You write a Python script to connect to Google BigQuery from a Google Compute Engine virtual machine. The script is printing errors that it cannot connect to BigQuery. What should you do to fix the script?",
+        "type": "radio",
+        "options": [
+            "A. Install the latest BigQuery API client library for Python",
+            "B. Run your script on a new virtual machine with the BigQuery access scope enabled",
+            "C. Create a new service account with BigQuery access and execute your script with that user",
+            "D. Install the bq component for gcloud with the command gcloud components install bq."
+        ],
+        "response": "C"
+    },
+    {
+        "question": "Anonymous users from all over the world access a public health information website hosted in an on-premises EHR data center. The servers that host this website are older, and users are complaining about sluggish response times. There has also been a recent increase of distributed denial-of-service attacks toward the website. The attacks always come from the same IP address ranges. EHR management has identified the public health information website as an easy, low risk application to migrate to Google Cloud. You need to improve access latency and provide a security solution that will prevent the denial-of-service traffic from entering your Virtual Private Cloud (VPC) network. What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Deploy an external HTTP(S) load balancer, configure VPC firewall rules, and move the applications onto Compute Engine virtual machines.",
+            "B. Deploy an external HTTP(S) load balancer, configure Google Cloud Armor, and move the application onto Compute Engine virtual machines.",
+            "C. Containerize the application and move it into Google Kubernetes Engine (GKE). Create a GKE service to expose the pods within the cluster, and set up a GKE network policy.",
+            "D. Containerize the application and move it into Google Kubernetes Engine (GKE). Create an internal load balancer to expose the pods outside the cluster, and configure Identity-Aware Proxy (IAP) for access."
+        ],
+        "response": "B"
+    },
+    {
+        "question": "EHR wants to connect one of their data centers to Google Cloud. The data center is in a remote location over 100 kilometers from a Google-owned point of presence. They can’t afford new hardware, but their existing firewall can accommodate future throughput growth. They also shared these data points:\n* Servers in their on-premises data center need to talk to Google Kubernetes Engine (GKE) resources in the cloud.\n* Both on-premises servers and cloud resources are configured with private RFC 1918 IP addresses.\n* The service provider has informed the customer that basic Internet connectivity is a best-effort service with no SLA.\nYou need to recommend a connectivity option. What should you recommend?",
+        "type": "radio",
+        "options": [
+            "A. Provision Carrier Peering.",
+            "B. Provision a new Internet connection.",
+            "C. Provision a Partner Interconnect connection.",
+            "D. Provision a Dedicated Interconnect connection."
+        ],
+        "response": "C"
+    },
+    {
+        "question": "One of EHR’s healthcare customers is an internationally renowned research and hospital facility. Many of their patients are well-known public personalities. Sources both inside and outside have tried many times to obtain health information on these patients for malicious purposes. The hospital requires that patient information stored in Cloud Storage buckets not leave the geographic areas in which the buckets are hosted. You need to ensure that information stored in Cloud Storage buckets in the 'europe-west2' region does not leave that area. What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Encrypt the data in the application on-premises before the data is stored in the 'europe-west2' region.",
+            "B. Enable Virtual Private Cloud Service Controls, and create a service perimeter around the Cloud Storage resources.",
+            "C. Assign the Identity and Access Management (IAM) 'storage.objectViewer' role only to users and service accounts that need to use the data.",
+            "D. Create an access control list (ACL) that limits access to the bucket to authorized users only, and apply it to the buckets in the 'europe-west2' region."
+        ],
+        "response": "B"
+    },
+    {
+        "question": "The EHR sales employees are a remote-based workforce that travels to different locations to do their jobs. Regardless of their location, the sales employees need to access web-based sales tools located in the EHR data center. EHR is retiring their current Virtual Private Network (VPN) infrastructure, and you need to move the web-based sales tools to a BeyondCorp access model. Each sales employee has a Google Workspace account and uses that account for single sign-on (SSO). What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Create an Identity-Aware Proxy (IAP) connector that points to the sales tool application.",
+            "B. Create a Google group for the sales tool application, and upgrade that group to a security group.",
+            "C. Deploy an external HTTP(S) load balancer and create a custom Cloud Armor policy for the sales tool application.",
+            "D. For every sales employee who needs access to the sales tool application, give their Google Workspace user account the predefined AppEngine Viewer role."
+        ],
+        "response": "A"
+    },
+    {
+        "question": "You are the data compliance officer for Mountkirk Games and must protect customers' personally identifiable information (PII). Mountkirk Games wants to make sure they can generate anonymized usage reports about their new game and delete PII data after a specific period of time. The solution should have minimal cost. You need to ensure compliance while meeting business and technical requirements. What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Archive audit logs in Cloud Storage, and manually generate reports.",
+            "B. Write a Cloud Logging filter to export specific date ranges to Pub/Sub.",
+            "C. Archive audit logs in BigQuery, and generate reports using Google Data Studio.",
+            "D. Archive user logs on a locally attached persistent disk, and cat them to a text file for auditing."
+        ],
+        "response": "C"
+    },
+    {
+        "question": "Mountkirk Games wants you to make sure their new gaming platform is being operated according to Google best practices. You want to verify that Google-recommended security best practices are being met while also providing the operations teams with the metrics they need. What should you do? (Choose two)",
+        "type": "checkbox",
+        "options": [
+            "A. Ensure that you aren’t running privileged containers.",
+            "B. Ensure that you are using obfuscated Tags on workloads.",
+            "C. Ensure that you are using the native logging mechanisms.",
+            "D. Ensure that workloads are not using securityContext to run as a group."
+        ],
+        "response": "A, C"
+    },
+    {
+        "question": "You need to implement Virtual Private Cloud (VPC) Service Controls for Mountkirk Games. Mountkirk Games wants to allow Cloud Shell usage by its developers. Developers should not have full access to managed services. You need to balance these conflicting goals with Mountkirk Games’ business requirements. What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Use VPC Service Controls for the entire platform.",
+            "B. Prioritize VPC Service Controls implementation over Cloud Shell usage for the entire platform.",
+            "C. Include all developers in an access level associated with the service perimeter, and allow them to use Cloud Shell.",
+            "D. Create a service perimeter around only the projects that handle sensitive data, and do not grant your developers access to it."
+        ],
+        "response": "D"
+    },
+    {
+        "question": "Your new game running on Google Cloud is in public beta, and you want to design meaningful service level objectives (SLOs) before the game becomes generally available. What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Define one SLO as 99.9% game server availability. Define the other SLO as less than 100-ms latency.",
+            "B. Define one SLO as service availability that is the same as Google Cloud's availability. Define the other SLO as 100-ms latency.",
+            "C. Define one SLO as 99% HTTP requests return the 2xx status code. Define the other SLO as 99% requests return within 100 ms.",
+            "D. Define one SLO as total uptime of the game server within a week. Define the other SLO as the mean response time of all HTTP requests that are less than 100 ms."
+        ],
+        "response": "C"
+    },
+    {
+        "question": "HRL wants you to help them bring existing recorded video content to new fans in emerging regions. Considering the HRL business and technical requirements, what should you do?",
+        "type": "radio",
+        "options": [
+            "A. Serve the video content directly from a multi-region Cloud Storage bucket.",
+            "B. Use Cloud CDN to cache the video content from HRL’s existing public cloud provider.",
+            "C. Use Apigee Edge to cache the video content from HRL’s existing public cloud provider.",
+            "D. Replicate the video content in Google Kubernetes Engine clusters in regions close to the fans."
+        ],
+        "response": "B"
+    },
+    {
+        "question": "You are the data compliance officer for TerramEarth and must protect customers' personally identifiable information (PII), like credit card information. TerramEarth wants to personalize product recommendations for its large industrial customers. You need to respect data privacy and deliver a solution. What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Use AutoML to provide data to the recommendation service.",
+            "B. Process PII data on-premises to keep the private information more secure.",
+            "C. Use the Cloud Data Loss Prevention (DLP) API to provide data to the recommendation service.",
+            "D. Manually build, train, and test machine learning models to provide product recommendations anonymously."
+        ],
+        "response": "C"
+    },
+    {
+        "question": "You are designing a future-proof hybrid environment that will require network connectivity between Google Cloud and your on-premises environment. You want to ensure that the Google Cloud environment you are designing is compatible with your on-premises networking environment. What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Use the default VPC in your Google Cloud project. Use a Cloud VPN connection between your on-premises environment and Google Cloud.",
+            "B. Create a custom VPC in Google Cloud in auto mode. Use a Cloud VPN connection between your on-premises environment and Google Cloud.",
+            "C. Create a network plan for your VPC in Google Cloud that uses CIDR ranges that overlap with your on-premises environment. Use a Cloud Interconnect connection between your on-premises environment and Google Cloud.",
+            "D. Create a network plan for your VPC in Google Cloud that uses non-overlapping CIDR ranges with your on-premises environment. Use a Cloud Interconnect connection between your on-premises environment and Google Cloud."
+        ],
+        "response": "D"
+    },
+    {
+        "question": "Your company wants to track whether someone is present in a meeting room reserved for a scheduled meeting. There are 1000 meeting rooms across 5 offices on 3 continents. Each room is equipped with a motion sensor that reports its status every second. You want to support the data ingestion needs of this sensor network. The receiving infrastructure needs to account for the possibility that the devices may have inconsistent connectivity. Which solution should you design?",
+        "type": "radio",
+        "options": [
+            "A. Have each device create a persistent connection to a Compute Engine instance and write messages to a custom application.",
+            "B. Have devices poll for connectivity to Cloud SQL and insert the latest messages on a regular interval to a device specific table.",
+            "C. Have devices poll for connectivity to Pub/Sub and publish the latest messages on a regular interval to a shared topic for all devices.",
+            "D. Have devices create a persistent connection to an App Engine application fronted by Cloud Endpoints, which ingest messages and write them to Datastore."
+        ],
+        "response": "C"
+    },
+    {
+        "question": "Your company wants to try out the cloud with low risk. They want to archive approximately 100 TB of their log data to the cloud and test the serverless analytics features available to them there, while also retaining that data as a long-term disaster recovery backup. Which two steps should they take? (Choose two)",
+        "type": "checkbox",
+        "options": [
+            "A. Load logs into BigQuery.",
+            "B. Load logs into Cloud SQL.",
+            "C. Import logs into Cloud Logging.",
+            "D. Insert logs into Cloud Bigtable.",
+            "E. Upload log files into Cloud Storage."
+        ],
+        "response": "A, E"
+    },
+    {
+        "question": "You set up an autoscaling managed instance group to serve web traffic for an upcoming launch. After configuring the instance group as a backend service to an HTTP(S) load balancer, you notice that virtual machine (VM) instances are being terminated and re-launched every minute. The instances do not have a public IP address. You have verified that the appropriate web response is coming from each instance using the curl command. You want to ensure that the backend is configured correctly. What should you do?",
+        "type": "radio",
+        "options": [
+            "A. Ensure that a firewall rule exists to allow source traffic on HTTP/HTTPS to reach the load balancer.",
+            "B. Assign a public IP to each instance, and configure a firewall rule to allow the load balancer to reach the instance public IP.",
+            "C. Ensure that a firewall rule exists to allow load balancer health checks to reach the instances in the instance group.",
+            "D. Create a tag on each instance with the name of the load balancer. Configure a firewall rule with the name of the load balancer as the source and the instance tag as the destination."
+        ],
+        "response": "C"
+    },
+    {
+        "question": "Your organization has a 3-tier web application deployed in the same Google Cloud Virtual Private Cloud (VPC). Each tier (web, API, and database) scales independently of the others. Network traffic should flow through the web to the API tier, and then on to the database tier. Traffic should not flow between the web and the database tier. How should you configure the network with minimal steps?",
+        "type": "radio",
+        "options": [
+            "A. Add each tier to a different subnetwork.",
+            "B. Set up software-based firewalls on individual VMs.",
+            "C. Add tags to each tier and set up routes to allow the desired traffic flow.",
+            "D. Add tags to each tier and set up firewall rules to allow the desired traffic flow."
+        ],
+        "response": "D"
+    },
+    {
+        "question": "You are designing a large distributed application with 30 microservices. Each of your distributed microservices needs to connect to a database backend. You want to store the credentials securely. Where should you store the credentials?",
+        "type": "radio",
+        "options": [
+            "A. In the source code",
+            "B. In an environment variable",
+            "C. In a secret management system",
+            "D. In a config file that has restricted access through ACLs"
+        ],
+        "response": ""
+    },
+    {
+        "question": "Your customer is moving their corporate applications to Google Cloud. The security team wants detailed visibility of all resources in the organization. You use Resource Manager to set yourself up as the Organization Administrator. Which Identity and Access Management (IAM) roles should you give to the security team while following Google recommended practices?",
+        "type": "radio",
+        "options": [
+            "A. Organization viewer, Project owner",
+            "B. Organization viewer, Project viewer",
+            "C. Organization administrator, Project browser",
+            "D. Project owner, Network administrator"
+        ],
+        "response": "B"
+    },
+    {
+        "question": "To reduce costs, the Director of Engineering has required all developers to move their development infrastructure resources from on-premises virtual machines (VMs) to Google Cloud. These resources go through multiple start/stop events during the day and require state to persist. You have been asked to design the process of running a development environment in Google Cloud while providing cost visibility to the finance department. Which two steps should you take? (Choose two)",
+        "type": "checkbox",
+        "options": [
+            "A. Use persistent disks to store the state. Start and stop the VM as needed.",
+            "B. Use the 'gcloud --auto-delete' flag on all persistent disks before stopping the VM.",
+            "C. Apply VM CPU utilization label and include it in the BigQuery billing export.",
+            "D. Use BigQuery billing export and labels to relate cost to groups.",
+            "E. Store all state in a Local SSD, snapshot the persistent disks, and terminate the VM."
+        ],
+        "response": "A, D"
+    },
+    {
+        "question": "The database administration team has asked you to help them improve the performance of their new database server running on Compute Engine. The database is used for importing and normalizing the company’s performance statistics. It is built with MySQL running on Debian Linux. They have an n1-standard-8 virtual machine with 80 GB of SSD zonal persistent disk which they can't restart until the next maintenance event. What should they change to get better performance from this system as soon as possible and in a cost-effective manner?",
+        "type": "radio",
+        "options": [
+            "A. Increase the virtual machine’s memory to 64 GB.",
+            "B. Create a new virtual machine running PostgreSQL.",
+            "C. Dynamically resize the SSD persistent disk to 500 GB.",
+            "D. Migrate their performance metrics warehouse to BigQuery."
+        ],
+        "response": "C"
     }
 ]
