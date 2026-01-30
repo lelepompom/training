@@ -1,0 +1,49 @@
+[
+    {
+        "question": "Your company has decided to make a major revision of their API in order to create better experiences for their developers. They need to keep the old version of the API available and deployable, while allowing new customers and testers to try out the new API. They want to keep the same SSL and DNS records in place to serve both APIs. What should they do?",
+        "type": "radio",
+        "options": [
+            "A. Configure a new load balancer for the new version of the API",
+            "B. Reconfigure old clients to use a new endpoint for the new API",
+            "C. Have the old API forward traffic to the new API based on the path",
+            "D. Use separate backend pools for each API path behind the load balancer"
+        ],
+        "response": "D"
+    },
+    {
+        "question": "Your company plans to migrate a multi-petabyte data set to the cloud. The data set must be available 24hrs a day. Your business analysts have experience only with using a SQL interface. How should you store the data to optimize it for ease of analysis?",
+        "type": "radio",
+        "options": [
+            "A. Load data into Google BigQuery",
+            "B. Insert data into Google Cloud SQL",
+            "C. Put flat files into Google Cloud Storage",
+            "D. Stream data into Google Cloud Datastore"
+        ],
+        "response": "A"
+    },
+    {
+        "question": "The operations manager asks you for a list of recommended practices that she should consider when migrating a J2EE application to the cloud. Which three practices should you recommend? (Choose three.)",
+        "type": "checkbox",
+        "options": [
+            "A. Port the application code to run on Google App Engine",
+            "B. Integrate Cloud Dataflow into the application to capture real-time metrics",
+            "C. Instrument the application with a monitoring tool like Stackdriver Debugger",
+            "D. Select an automation framework to reliably provision the cloud infrastructure",
+            "E. Deploy a continuous integration tool with automated testing in a staging environment",
+            "F. Migrate from MySQL to a managed NoSQL database like Google Cloud Datastore or Bigtable"
+        ],
+        "response": "C,D,E"
+    },
+    {
+        "question": "You need to reduce the number of unplanned rollbacks of erroneous production deployments in your company's web hosting platform. Improvement to the QA/Test processes accomplished an 80% reduction. Which additional two approaches can you take to further reduce the rollbacks? (Choose two.)",
+        "type": "checkbox",
+        "options": [
+            "A. Introduce a green-blue deployment model",
+            "B. Replace the QA environment with canary releases",
+            "C. Fragment the monolithic platform into microservices",
+            "D. Reduce the platform's dependency on relational database systems",
+            "E. Replace the platform's relational database systems with a NoSQL database"
+        ],
+        "response": "A,D"
+    }
+]
